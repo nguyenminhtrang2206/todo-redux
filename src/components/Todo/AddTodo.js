@@ -2,20 +2,29 @@ import React, { useState } from "react";
 import classes from "./AddTodo.module.css";
 import Button from "../UI/Button";
 
+import { useDispatch } from "react-redux";
+import * as actionTypes from "..//store/actions";
+
 const AddTodo = () => {
   const [todo, setTodo] = useState({ title: "", task: "" });
+  const dispatch = useDispatch();
 
-  const changeHandler = (e) => {
+  const changeHandler = e => {
     const { name, value } = e.target;
 
-    setTodo((prevState) => ({
+    setTodo(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const addHandler = (e) => {
+  const addHandler = e => {
     e.preventDefault();
+    console.log(todo);
+    dispatch({
+      type: actionTypes.ADD_TODO,
+      payload: todo,
+    });
   };
 
   return (
@@ -28,7 +37,7 @@ const AddTodo = () => {
         <label>Task</label>
         <input type="text" onChange={changeHandler} />
       </div>
-      <Button>Add Task</Button>
+      <Button type="submit">Add Task</Button>
     </form>
   );
 };

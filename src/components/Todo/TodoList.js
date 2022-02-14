@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-import { notes } from "../../notes";
 import classes from "./TodoList.module.css";
 
 const TodoList = () => {
-  const notes = useSelector(state => state);
+  const notes = useSelector(state => state.notes);
+
   const removeHandler = id => {
     console.log(id, "was clicked");
   };
