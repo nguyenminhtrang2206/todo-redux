@@ -37,11 +37,31 @@ const reducer = (state = initialState, action) => {
           ...state.notes,
           {
             id: new Date().valueOf(),
-            ...action.todo,
+            ...action.payload,
             done: false,
           },
         ],
       };
+    case actionTypes.REMOVE_TODO:
+      const updateArray = state.notes.filter(
+        item => item.id !== action.payload
+      );
+      return {
+        ...state,
+        notes: updateArray,
+      };
+
+    case actionTypes.DONE_TODO:
+      const doneToggle = state.notes.map(item => {
+        return item.id === action.payload
+          ? { ...item, done: !item.done }
+          : { ...item };
+      });
+      return {
+        ...state,
+        notes: doneToggle,
+      };
+
     default:
       return state;
   }

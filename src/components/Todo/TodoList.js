@@ -1,16 +1,26 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as actionTypes from "..//store/actions";
 
 import classes from "./TodoList.module.css";
 
 const TodoList = () => {
   const notes = useSelector(state => state.notes);
 
+  const dispatch = useDispatch();
+
   const removeHandler = id => {
-    console.log(id, "was clicked");
+    dispatch({
+      type: actionTypes.REMOVE_TODO,
+      payload: id,
+    });
   };
   const doneHandler = id => {
-    console.log(id, "was clicked");
+    dispatch({
+      type: actionTypes.DONE_TODO,
+      payload: id,
+    });
   };
 
   return (
@@ -25,9 +35,7 @@ const TodoList = () => {
             }`}
             key={note.id}
           >
-            <h2>
-              {note.id}. {note.title}
-            </h2>
+            <h2>{note.title}</h2>
             <p>{note.task}</p>
             <span
               onClick={() => removeHandler(note.id)}

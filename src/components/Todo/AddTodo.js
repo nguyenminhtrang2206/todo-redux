@@ -31,11 +31,11 @@ const AddTodo = () => {
     <form onSubmit={addHandler} className={classes.input}>
       <div>
         <label>Title</label>
-        <input type="text" onChange={changeHandler} />
+        <input type="text" name="title" onChange={changeHandler} />
       </div>
       <div>
         <label>Task</label>
-        <input type="text" onChange={changeHandler} />
+        <input type="text" name="task" onChange={changeHandler} />
       </div>
       <Button type="submit">Add Task</Button>
     </form>
